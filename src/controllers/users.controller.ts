@@ -3,8 +3,8 @@ import fs from 'fs'
 import https from 'https'
 import {
   Response, Controller,
-  Get, Post, Put, Delete,
-  Params, Body, Query,
+  Get, Delete,
+  Params,
 } from '@decorators/express'
 
 import { IUser, IData } from '../models'
@@ -13,14 +13,16 @@ import { IUser, IData } from '../models'
 class UsersController {
   @Get('/:id')
   async getUser(@Response() res: any, @Params('id') id: string) {
-    axios.get(`https://reqres.in/api/users/${id}`)
-      .then(resp => resp.data)
-      .then((resp: IData) => res.send({
+    try {
+      const data: IData = (await axios.get(`https://reqres.in/api/users/${id}`)).data
+      const user: IUser = data.data
+      res.send({
         success: true,
-        data: resp.data
-      })).catch(err => {
-        this.errorHandler(res, 'No Data with provided id')
+        data: user
       })
+    } catch (e) {
+      this.errorHandler(res, 'No Data with provided id')
+    }
   }
 
   @Get('/:id/avatar')
