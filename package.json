@@ -1,7 +1,6 @@
 {
-  "name": "yerevan",
-  "version": "1.1.0",
-  "description": "Node, TypeScript, Knex, PostgreSQL Starter Kit",
+  "name": "reqres",
+  "version": "1.0.0",
   "main": "lib/index",
   "types": "lib/index",
   "scripts": {
@@ -14,19 +13,6 @@
     "tsc": "tsc",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/alonavns/Yerevan.git"
-  },
-  "keywords": [
-    "Node",
-    "TypeScript",
-    "Knex",
-    "Postgresql",
-    "Starter",
-    "Kit"
-  ],
-  "author": "Alona Veresehaka",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^10.12.10",
@@ -38,10 +24,6 @@
     "typescript": "^3.2.1",
     "typescript-eslint-parser": "^21.0.1"
   },
-  "bugs": {
-    "url": "https://github.com/alonavns/Yerevan/issues"
-  },
-  "homepage": "https://github.com/alonavns/Yerevan",
   "dependencies": {
     "@decorators/common": "^1.1.2",
     "@decorators/di": "^1.0.2",
