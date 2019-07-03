@@ -63,3 +63,7 @@ typings/
 # build files
 dist
 lib
+
+# downloads
+avatars
+users

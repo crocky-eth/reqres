@@ -7,12 +7,15 @@ import {
   Params, Body, Query,
 } from '@decorators/express'
 
+import { IUser, IData } from '../models'
+
 @Controller('/api/users')
 class UsersController {
   @Get('/:id')
   async getUser(@Response() res: any, @Params('id') id: string) {
     axios.get(`https://reqres.in/api/users/${id}`)
-      .then(resp => res.send({
+      .then(resp => resp.data)
+      .then((resp: IData) => res.send({
         success: true,
         data: resp.data
       })).catch(err => {
@@ -23,10 +26,17 @@ class UsersController {
   @Get('/:id/avatar')
   async getUserAvatar(@Response() res: any, @Params('id') id: string) {
     try {
-      const { data: { data: { avatar } } } = await axios.get(`https://reqres.in/api/users/${id}`)
+      const data: IData = (await axios.get(`https://reqres.in/api/users/${id}`)).data
+      const user: IUser = data.data
+      const { avatar } = user
       const avatarExt = getExt(avatar)
-      const filePath = `./avatars/${id}.${avatarExt}`
-      const exists = fs.existsSync(filePath)
+      const dirPath = 'avatars'
+      let exists = fs.existsSync(dirPath)
+      if (!exists) {
+        fs.mkdirSync(dirPath)
+      }
+      const filePath = dirPath + `/${id}.${avatarExt}`
+      exists = fs.existsSync(filePath)
       if (exists) {
         res.send({
           success: true,
@@ -53,7 +63,9 @@ class UsersController {
   @Delete('/:id/avatar')
   async deleteUser(@Response() res: any, @Params('id') id: string) {
     try {
-      const { data: { data: { avatar } } } = await axios.get(`https://reqres.in/api/users/${id}`)
+      const data: IData = (await axios.get(`https://reqres.in/api/users/${id}`)).data
+      const user: IUser = data.data
+      const { avatar } = user
       const avatarExt = getExt(avatar)
       const filePath = `./avatars/${id}.${avatarExt}`
       fs.exists(filePath, exists => {

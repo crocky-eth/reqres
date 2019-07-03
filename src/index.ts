@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 const controllers: any[] = [];
 const normalizedPath = require("path").join(__dirname, "controllers");
 
-require("fs").readdirSync(normalizedPath).forEach(function (file: string) {
+require("fs").readdirSync(normalizedPath).forEach((file: string) => {
   if (file.indexOf('base') === -1)
     controllers.push(require("./controllers/" + file).default);
 });
