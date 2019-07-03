@@ -15,8 +15,13 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^10.12.10",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^5.9.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.18.7",
     "rimraf": "^2.6.2",
     "ts-node": "^7.0.1",
