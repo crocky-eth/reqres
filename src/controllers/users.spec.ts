@@ -54,7 +54,7 @@ describe('Users', () => {
 
     it(`Should get Error`, (done) => {
       chai.request(server)
-        .get(`/api/users/${noUser}`)
+        .get(`/api/users/${noUser}/avatar`)
         .end((err, res) => {
           expect(res.status).to.equal(403)
           expect(err).to.equal(null)
